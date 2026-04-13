@@ -17,6 +17,13 @@ export class AiService {
         return { move: -1, calculations: 0 };
     }
 
+    // Optimization: If board is empty, pick a corner or center instantly
+    if (availableMoves.length === 9) {
+      const bestStartingMoves = [0, 2, 4, 6, 8]; // Corners and Center
+      const randomBestMove = bestStartingMoves[Math.floor(Math.random() * bestStartingMoves.length)];
+      return { move: randomBestMove, calculations: 1 };
+    }
+
     if (difficulty === 'easy') {
       // Pick randomly
       bestMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];

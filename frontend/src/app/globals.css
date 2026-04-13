@@ -20,9 +20,18 @@ body {
   color: var(--text-dark);
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   -webkit-font-smoothing: antialiased;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
 }
 
 body::before {
@@ -68,8 +77,8 @@ body::after {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
+  min-height: 70vh;
+  width: 100%;
 }
 
 .hero-content {
@@ -448,8 +457,147 @@ select:hover, select:focus {
   color: var(--accent);
 }
 
+
 .nav-link.active {
   color: var(--text-dark);
   font-weight: 600;
 }
+
+/* --- Restart Button Styles --- */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 0.5rem;
+}
+
+.restart-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-dark);
+}
+
+.restart-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* --- Mobile Optimization --- */
+@media (max-width: 768px) {
+  .navbar {
+    display: none !important; /* Hide navbar on mobile as per user request */
+  }
+
+  main {
+    padding-top: 2rem; /* Much less padding since navbar is gone */
+    padding-bottom: 2rem;
+  }
+
+  .game-wrapper {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .game-header {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .header-top {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .minimal-title {
+    font-size: 1.2rem;
+  }
+
+  .scoreboard {
+    gap: 1.5rem;
+    padding: 1rem;
+    width: 100%;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+  }
+
+  .score-value {
+    font-size: 1.5rem;
+  }
+
+  .game-layout {
+    padding: 1.5rem 1rem;
+    gap: 2rem;
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  .game-sidebar {
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .controls-row {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .control-group {
+    width: 100%;
+  }
+
+  select {
+    width: 100%;
+    background: white;
+  }
+
+  .status-box {
+    padding: 1rem;
+    min-height: 80px;
+  }
+
+  .board {
+    gap: 8px;
+  }
+
+  .cell {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+    border-radius: 14px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cell {
+    width: 70px;
+    height: 70px;
+    font-size: 2.2rem;
+  }
+  
+  .scoreboard {
+    gap: 0.5rem;
+  }
+  
+  .score-item .control-label {
+    font-size: 0.65rem;
+  }
+}
+
 

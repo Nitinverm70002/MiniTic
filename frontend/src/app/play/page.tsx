@@ -106,7 +106,7 @@ export default function PlayGame() {
       makeAiMove(aiSymbol);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [player, gameStatus]);
+  }, [player, gameStatus, humanSymbol]);
 
   const makeAiMove = async (aiSymbol: Player) => {
     setIsAiThinking(true);
@@ -127,6 +127,7 @@ export default function PlayGame() {
 
       const data = await response.json();
       
+      // Snappier AI response (reduced from 500ms)
       setTimeout(() => {
         if (data.move !== -1) {
           const newBoard = [...board];
@@ -139,7 +140,7 @@ export default function PlayGame() {
           }
         }
         setIsAiThinking(false);
-      }, 500);
+      }, 300);
 
     } catch (error) {
       console.error('Error fetching AI move', error);
@@ -175,10 +176,15 @@ export default function PlayGame() {
   return (
     <>
       {showLoseEffect && <div className="lose-overlay" />}
-      <main className={`game-wrapper ${showLoseEffect ? 'lose-crazy-mode' : ''}`}>
+      <div className={`game-wrapper ${showLoseEffect ? 'lose-crazy-mode' : ''}`}>
         
         <div className="game-header">
-          <h2 className="minimal-title">Game Score</h2>
+          <div className="header-top">
+            <h2 className="minimal-title">Game Score</h2>
+            <button className="restart-btn" onClick={resetGame}>
+              Restart
+            </button>
+          </div>
           <Scoreboard 
             wins={scores.wins} 
             losses={scores.losses} 
@@ -196,9 +202,7 @@ export default function PlayGame() {
               onFirstPlayerChange={handleFirstPlayerChange}
             />
             
-            <button className="secondary-btn" onClick={resetGame}>
-              Restart Game
-            </button>
+
 
             <div className="status-box">
               <div className="status-main">
@@ -230,7 +234,7 @@ export default function PlayGame() {
           </section>
 
         </div>
-      </main>
+      </div>
     </>
   );
 }
