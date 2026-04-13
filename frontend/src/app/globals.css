@@ -7,6 +7,33 @@
   --glass-bg: rgba(255, 255, 255, 0.75);
   --glass-border: rgba(255, 255, 255, 0.4);
   --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  --cell-bg: #ffffff;
+  --input-bg: rgba(255, 255, 255, 0.9);
+  --input-border: rgba(0, 0, 0, 0.08);
+  --btn-secondary-bg: transparent;
+  --btn-secondary-border: rgba(0, 0, 0, 0.1);
+  --status-box-bg: rgba(0, 0, 0, 0.02);
+  --color-x: #fa5252;
+  --color-o: #228be6;
+}
+
+[data-theme='dark'] {
+  --primary-bg: #0a0a0a;
+  --text-dark: #f8f9fa;
+  --text-light: #adb5bd;
+  --accent: #339af0;
+  --accent-hover: #4dabf7;
+  --glass-bg: rgba(20, 20, 20, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  --cell-bg: #1a1a1a;
+  --input-bg: rgba(30, 30, 30, 0.9);
+  --input-border: rgba(255, 255, 255, 0.1);
+  --btn-secondary-bg: rgba(255, 255, 255, 0.05);
+  --btn-secondary-border: rgba(255, 255, 255, 0.1);
+  --status-box-bg: rgba(255, 255, 255, 0.03);
+  --color-x: #ff6b6b;
+  --color-o: #4dabf7;
 }
 
 * {
@@ -22,6 +49,7 @@ body {
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 main {
@@ -49,6 +77,15 @@ body::before {
     radial-gradient(circle at 30% 80%, rgba(23, 201, 100, 0.12) 0%, transparent 40%),
     radial-gradient(circle at 80% 80%, rgba(250, 176, 5, 0.1) 0%, transparent 50%);
   animation: colorDrift 20s infinite alternate ease-in-out;
+  transition: background-color 0.4s ease;
+}
+
+[data-theme='dark'] body::before {
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(34, 139, 230, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 30%, rgba(190, 75, 219, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 30% 80%, rgba(23, 201, 100, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(250, 176, 5, 0.06) 0%, transparent 50%);
 }
 
 body::after {
@@ -64,6 +101,12 @@ body::after {
     linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 32px 32px;
   pointer-events: none;
+}
+
+[data-theme='dark'] body::after {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }
 
 @keyframes colorDrift {
@@ -91,7 +134,7 @@ body::after {
   font-weight: 800;
   letter-spacing: -0.04em;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #111 0%, #555 100%);
+  background: linear-gradient(135deg, var(--text-dark) 0%, #555 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -162,6 +205,7 @@ body::after {
   padding: 3rem;
   box-shadow: var(--card-shadow);
   align-items: center;
+  transition: all 0.4s ease;
 }
 
 @media (max-width: 768px) {
@@ -198,8 +242,9 @@ select {
   font-size: 1rem;
   padding: 0.8rem 1rem;
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-dark);
   outline: none;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -211,9 +256,9 @@ select:hover, select:focus {
 }
 
 .secondary-btn {
-  background: transparent;
+  background: var(--btn-secondary-bg);
   color: var(--text-dark);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--btn-secondary-border);
   padding: 0.8rem 1rem;
   border-radius: 12px;
   font-size: 1rem;
@@ -229,7 +274,7 @@ select:hover, select:focus {
 
 /* Status Box inside sidebar */
 .status-box {
-  background: rgba(0,0,0,0.02);
+  background: var(--status-box-bg);
   padding: 1.5rem;
   border-radius: 12px;
   text-align: center;
@@ -273,7 +318,7 @@ select:hover, select:focus {
   align-items: center;
   font-size: 3.5rem;
   font-weight: 700;
-  background: white;
+  background: var(--cell-bg);
   border-radius: 18px;
   border: none;
   cursor: pointer;
@@ -292,11 +337,11 @@ select:hover, select:focus {
 }
 
 .cell.x {
-  color: #fa5252;
+  color: var(--color-x);
 }
 
 .cell.o {
-  color: #228be6;
+  color: var(--color-o);
 }
 
 .cell.winning {
@@ -395,12 +440,13 @@ select:hover, select:focus {
   width: 90%;
   max-width: 1000px;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.35);
+  background: var(--glass-bg);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--glass-border);
   border-radius: 999px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
 }
 
 .navbar-container {
@@ -427,6 +473,7 @@ select:hover, select:focus {
   font-weight: 800;
   letter-spacing: -2px;
   font-size: 1.4rem;
+  transition: color 0.4s ease;
 }
 
 .logo-text {
@@ -434,9 +481,10 @@ select:hover, select:focus {
   font-weight: 900;
   letter-spacing: 0.03em;
   font-size: 1.6rem;
-  background: linear-gradient(135deg, #111 0%, #555 100%);
+  background: linear-gradient(135deg, var(--text-dark) 0%, #555 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  transition: all 0.4s ease;
 }
 
 .navbar-links {
@@ -474,8 +522,8 @@ select:hover, select:focus {
 }
 
 .restart-btn {
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--btn-secondary-bg);
+  border: 1px solid var(--btn-secondary-border);
   padding: 0.5rem 1.25rem;
   border-radius: 999px;
   font-size: 0.85rem;
@@ -486,7 +534,7 @@ select:hover, select:focus {
 }
 
 .restart-btn:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--btn-secondary-border);
   transform: translateY(-1px);
 }
 
@@ -525,7 +573,8 @@ select:hover, select:focus {
     padding: 1rem;
     width: 100%;
     justify-content: space-around;
-    background: rgba(255, 255, 255, 0.4);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
   }
 
@@ -560,7 +609,8 @@ select:hover, select:focus {
 
   select {
     width: 100%;
-    background: white;
+    background: var(--input-bg);
+    color: var(--text-dark);
   }
 
   .status-box {

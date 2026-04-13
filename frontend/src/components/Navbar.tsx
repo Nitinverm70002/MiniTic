@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { ThemeToggle } from './ThemeToggle';
 
 export const Navbar = () => {
   return (
@@ -13,6 +14,7 @@ export const Navbar = () => {
         <nav className="navbar-links">
           <Link href="/play" className="nav-link active">Play</Link>
           <a href="https://github.com/Nitinverm70002/MiniTic" target="_blank" rel="noreferrer" className="nav-link">GitHub</a>
+          <ThemeToggle />
         </nav>
       </div>
     </header>

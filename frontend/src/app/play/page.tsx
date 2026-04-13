@@ -10,6 +10,14 @@ type Player = 'X' | 'O' | null;
 type Difficulty = 'easy' | 'medium' | 'hard';
 type BoardType = Player[];
 
+const AI_WIN_MESSAGES = [
+  "I calculated your defeat 3 moves ago 🤖",
+  "You never had a chance 😌",
+  "I saw that coming from the first move",
+  "Humans are still learning… keep trying 👀",
+  "Minimax > Your max 😏"
+];
+
 export default function PlayGame() {
   const [board, setBoard] = useState<BoardType>(Array(9).fill(null));
   const [player, setPlayer] = useState<Player>('X');
@@ -23,6 +31,7 @@ export default function PlayGame() {
   const [isAiThinking, setIsAiThinking] = useState(false);
   const [aiCalculations, setAiCalculations] = useState<number | null>(null);
   const [showLoseEffect, setShowLoseEffect] = useState(false);
+  const [aiWinMessage, setAiWinMessage] = useState("");
 
   // Check win condition locally
   const WINNING_COMBINATIONS = [
@@ -42,6 +51,8 @@ export default function PlayGame() {
           fireConfetti();
         } else {
           setScores(s => ({ ...s, losses: s.losses + 1 }));
+          const randomMsg = AI_WIN_MESSAGES[Math.floor(Math.random() * AI_WIN_MESSAGES.length)];
+          setAiWinMessage(randomMsg);
           setShowLoseEffect(true);
           setTimeout(() => setShowLoseEffect(false), 3000);
         }
@@ -167,6 +178,7 @@ export default function PlayGame() {
     setWinningLine([]);
     setAiCalculations(null);
     setShowLoseEffect(false);
+    setAiWinMessage("");
     setPlayer('X');
   };
 
@@ -208,7 +220,7 @@ export default function PlayGame() {
               <div className="status-main">
                 {gameStatus === 'won' && 
                   <span style={{color: winnerSymbol === humanSymbol ? '#40c057' : '#fa5252'}}>
-                    {winnerSymbol === humanSymbol ? 'You Won!' : 'Critical Matrix Failure: AI Won!'}
+                    {winnerSymbol === humanSymbol ? 'You Won!' : aiWinMessage}
                   </span>
                 }
                 {gameStatus === 'draw' && <span>It's a Draw!</span>}
