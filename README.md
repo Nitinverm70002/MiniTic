@@ -4,6 +4,11 @@ This is a complete full-stack project built for a college AI curriculum featurin
 
 ## Architecture
 
+![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge\&logo=next.js)
+![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge\&logo=nestjs)
+![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=for-the-badge\&logo=typescript)
+![AI](https://img.shields.io/badge/AI-Minimax%20Algorithm-green?style=for-the-badge)
+
 - **Frontend**: Next.js (React)
   - Designed using modern "Apple-style" aesthetics (San Francisco system font, glassmorphism, soft drop shadows), using vanilla CSS.
   - Keeps track of game board, turns, win statistics, and user configurable difficulty settings.
