@@ -112,8 +112,10 @@ export default function PlayGame() {
     setIsAiThinking(true);
     setAiCalculations(null);
 
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
     try {
-      const response = await fetch('http://localhost:3001/api/game/move', {
+      const response = await fetch(`${apiUrl}/api/game/move`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
